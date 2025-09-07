@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tareas</title>
+</head>
+
+<body>
+    <h1>Tareas</h1>
+    <!-- TODO: HACER CRUD EN ESTA PAGINA, se deberia de usar Javascript? -->
+    <!-- TODO: NO USAR PAGINAS PARA TAREAS CRUD, solamente hacelo en este index -->
+
+    <!-- Formulario de nueva tarea -->
+    <h2>Nueva tarea</h2>
+    <form th:action="@{/tareas}" method="post">
+        <input type="text" placeholder="titulo" name="titulo" required>
+        <input type="text" placeholder="descricion" name="descripcion" required>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <h2>Listado de tareas</h2>
+    <ul>
+        <li th:each="tarea : ${tareas}">
+            <!-- FOrmulario Inline para editar -->
+            <form th:action="@{/tareas}" method="post" style="display: inline;">
+                <input type="hidden" name="id" th:value="${tarea.id}" />
+                <label for="titulo">titulo:</label>
+                <input type="text" name="titulo" id="titulo" th:value="${tarea.titulo}" required />
+
+                <label for="descripcion">descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion" th:value="${tarea.descripcion}" required />
+
+                <label for="completada">completada:</label>
+                <input type="checkbox" id="completada" name="completada" th:checked="${tarea.completada}" />
+                <button type="submit">guardar</button>
+            </form>
+
+        </li>
+    </ul>
+
+    <h2>Editar tarea</h2>
+
+</body>
+
+</html>
